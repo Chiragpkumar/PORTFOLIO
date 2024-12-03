@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHIRAG P KUMAR :: SYSTEM INTERFACE</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&family=Rubik+Glitch&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/cyber-theme.css">
+    <link rel="stylesheet" href="css/matrix.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body class="cyber-theme">
+    <!-- Boot Screen -->
+    <div id="boot-screen-include"></div>
+    
+    <!-- Main Content -->
+    <div class="crt main-content">
+        <!-- Navigation -->
+        <div id="nav-include"></div>
+
+        <!-- Main Content Sections -->
+        <div class="content-sections">
+            <!-- Home Section -->
+            <div id="home-include"></div>
+            
+            <!-- About Section -->
+            <div id="about-include"></div>
+            
+            <!-- Skills Section -->
+            <div id="skills-include"></div>
+            
+            <!-- Projects Section -->
+            <div id="projects-include"></div>
+            
+            <!-- Contact Section -->
+            <div id="contact-include"></div>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer-include"></div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="js/components.js"></script>
+    <script src="js/boot.js"></script>
+    <script src="js/matrix.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Component Loader -->
+    <script>
+        // Function to load HTML content with error handling and loading indicator
+        async function includeHTML(elementId, filePath) {
+            const element = document.getElementById(elementId);
+            if (!element) {
+                console.error(`Element with id '${elementId}' not found!`);
+                return;
+            }
+
+            // Add loading indicator
+            element.innerHTML = '<div class="loading-indicator">Loading...</div>';
+
+            try {
+                const response = await fetch(`components/${filePath}`);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const content = await response.text();
+                element.innerHTML = content;
+                console.log(`Successfully loaded ${filePath}`);
+            } catch (error) {
+                console.error(`Error loading ${filePath}:`, error);
+                element.innerHTML = `<div class="error-message">Error loading component: ${filePath}</div>`;
+            }
+        }
+
+        // Load all components when DOM is ready
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('DOM Content Loaded, loading components...');
+            
+            try {
+                // Load components in sequence to maintain proper order
+                await includeHTML('boot-screen-include', 'boot-screen.html');
+                await includeHTML('nav-include', 'navigation.html');
+                await includeHTML('home-include', 'home.html');
+                await includeHTML('about-include', 'about.html');
+                await includeHTML('skills-include', 'skills.html');
+                await includeHTML('projects-include', 'projects.html');
+                await includeHTML('contact-include', 'contact.html');
+                await includeHTML('footer-include', 'footer.html');
+                
+                // Initialize components after they're loaded
+                initializeNavigation();
+                initializeMatrix();
+                initializeAnimations();
+            } catch (error) {
+                console.error('Error loading components:', error);
+            }
+        });
+    </script>
+
+    <!-- Loading and Error Styles -->
+    <style>
+        .loading-indicator {
+            padding: 20px;
+            text-align: center;
+            color: var(--accent-color, #0f0);
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .error-message {
+            padding: 20px;
+            text-align: center;
+            color: #ff0000;
+            font-family: 'Source Code Pro', monospace;
+            border: 1px solid #ff0000;
+            margin: 10px;
+        }
+
+        .content-sections {
+            min-height: 100vh;
+            padding-top: 60px;
+        }
+    </style>
+</body>
+</html>

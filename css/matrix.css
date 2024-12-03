@@ -1,0 +1,88 @@
+/* Matrix Animation Styles */
+#matrix-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.15;
+}
+
+#matrixCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* CRT and Scanline Effects */
+.scanline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(15, 255, 15, 0.1);
+    opacity: 0.75;
+    animation: scanline 6s linear infinite;
+    z-index: 999;
+    pointer-events: none;
+}
+
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVfk6YAAAACHRSTlMzMzMzMzMzM85JBgUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAwSURBVDjLY2AYBaNg8AIWQQYGRkEE8URmYAALsCgoQKUYkAFUDhdgQpUGCwyGEQAAuqsGf8kT9TUAAAAASUVORK5CYII=');
+    opacity: 0.02;
+    z-index: 998;
+    pointer-events: none;
+}
+
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(15, 255, 15, 0.1) 50%,
+        rgba(0, 0, 0, 0.1) 50%
+    );
+    background-size: 100% 4px;
+    z-index: 997;
+    pointer-events: none;
+    opacity: 0.15;
+}
+
+/* Matrix Animation */
+@keyframes scanline {
+    0% {
+        transform: translateY(-100vh);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 0.9;
+    }
+    5% {
+        opacity: 0.5;
+    }
+    10% {
+        opacity: 0.9;
+    }
+    15% {
+        opacity: 0.7;
+    }
+    20% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 0.9;
+    }
+}

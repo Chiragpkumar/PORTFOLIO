@@ -1,0 +1,107 @@
+/* Cyber Theme Styles */
+.cyber-theme {
+    --neon-shadow: 0 0 5px var(--primary-color),
+                   0 0 10px var(--primary-color),
+                   0 0 15px var(--primary-color);
+}
+
+.cyber-border {
+    border: 2px solid var(--primary-color);
+    box-shadow: var(--neon-shadow);
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.cyber-border::before,
+.cyber-border::after {
+    content: '';
+    position: absolute;
+    background: var(--primary-color);
+}
+
+.cyber-border::before {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    animation: borderGlow 2s infinite;
+}
+
+.cyber-border::after {
+    bottom: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    animation: borderGlow 2s infinite 0.5s;
+}
+
+/* Cyber Buttons */
+.cyber-btn {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.8rem 1.5rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cyber-btn:hover {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    box-shadow: var(--neon-shadow);
+}
+
+.cyber-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(15, 255, 15, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.cyber-btn:hover::before {
+    left: 100%;
+}
+
+/* Terminal Window */
+.terminal-window {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.terminal-prompt {
+    color: var(--primary-color);
+    font-family: var(--font-mono);
+    margin-bottom: 0.5rem;
+}
+
+.terminal-prompt::before {
+    content: '>';
+    margin-right: 0.5rem;
+}
+
+/* Animations */
+@keyframes borderGlow {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
